@@ -299,7 +299,7 @@ public class TruckServiceImpl implements TruckService {
 
 		}
 		log.info("Truck Data get all method called");
-		return truckDao.findAll();
+		return truckDao.getAll(currentPage);
 	}
 
 	public String generateTruckNumber(String truckNo) {
