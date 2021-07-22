@@ -28,4 +28,9 @@ public interface TruckDao extends JpaRepository<TruckData, String> {
 	@Query("select t from TruckData t where t.truckId = :truckId")
 	List<TruckData> findByTruckId(String truckId, Pageable pageable);
 
+
+	@Query("select t from TruckData t")
+	List<TruckData> getAll(Pageable pageable);
+	
+	
 }
