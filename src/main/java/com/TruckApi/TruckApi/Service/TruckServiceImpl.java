@@ -276,7 +276,7 @@ public class TruckServiceImpl implements TruckService {
 		if (pageNo == null)
 			pageNo = 0;
 
-		Pageable currentPage = PageRequest.of(pageNo, 5,Sort.Direction.DESC,"timestamp");
+		Pageable currentPage = PageRequest.of(pageNo, TruckConstants.pageSize,Sort.Direction.DESC,"timestamp");
 
 		if (truckId != null) {
 			return truckDao.findByTruckId(truckId, currentPage);
