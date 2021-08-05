@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,7 +55,7 @@ public class TruckServiceImpl implements TruckService {
 
 		String truckNoUpdated = generateTruckNumber(truckNo);
 
-//		sending truckData to TruckData Table.
+		//		sending truckData to TruckData Table.
 		TruckData truckData = new TruckData();
 
 		String truckId_temp = "truck:" + UUID.randomUUID().toString();
@@ -109,14 +110,14 @@ public class TruckServiceImpl implements TruckService {
 
 		truckDao.save(truckData);
 
-//		sending truckData to truckId - TransporterId table.
+		//		sending truckData to truckId - TransporterId table.
 		TruckTransporterData sData = new TruckTransporterData();
 		sData.setTransporterId(truckRequest.getTransporterId());
 		sData.setTruckId(truckId_temp);
 
 		sTruckDao.save(sData);
 		log.info("Truck Data is saved");
-//		Sending success postResponse
+		//		Sending success postResponse
 		truckCreateResponse.setStatus(truckConstants.ADD_SUCCESS);
 		truckCreateResponse.setTransporterId(truckData.getTransporterId());
 		truckCreateResponse.setTruckId(truckId_temp);
@@ -221,8 +222,8 @@ public class TruckServiceImpl implements TruckService {
 
 		TruckDeleteResponse truckDeleteResponse = new TruckDeleteResponse();
 
-//		TruckData findTruckData = truckDao.findByTruckId(id);
-//		TruckTransporterData findTruckTransporterData = sTruckDao.findByTruckId(id);
+		//		TruckData findTruckData = truckDao.findByTruckId(id);
+		//		TruckTransporterData findTruckTransporterData = sTruckDao.findByTruckId(id);
 
 		TruckData truckData = truckDao.findByTruckId(id);
 		TruckTransporterData findTruckTransporterData = sTruckDao.findByTruckId(id);
@@ -275,7 +276,7 @@ public class TruckServiceImpl implements TruckService {
 		if (pageNo == null)
 			pageNo = 0;
 
-		Pageable currentPage = PageRequest.of(pageNo, (int) TruckConstants.pageSize);
+		Pageable currentPage = PageRequest.of(pageNo, TruckConstants.pageSize,Sort.Direction.DESC,"timestamp");
 
 		if (truckId != null) {
 			return truckDao.findByTruckId(truckId, currentPage);

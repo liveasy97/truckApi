@@ -24,6 +24,6 @@ public class TruckConstants {
 
 	public static final String CHECK_TRUCK_NO = "^[A-Za-z]{2}[ -/]{0,1}[0-9]{1,2}[ -/]{0,1}(?:[A-Za-z]{0,1})[ -/]{0,1}[A-Za-z]{0,2}[ -/]{0,1}[0-9]{4}$";
 
-	public static final long pageSize = 15;
+	public static final int pageSize = 15;
 
 }
