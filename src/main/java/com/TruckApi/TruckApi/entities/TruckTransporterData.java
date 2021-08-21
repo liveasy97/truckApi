@@ -18,6 +18,10 @@ public @Data class TruckTransporterData {
 	private String truckId;
 	@NotBlank(message = "Transporter Id can not be null")
 	private String transporterId;
+	public Object getTimestamp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }
