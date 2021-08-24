@@ -1,5 +1,7 @@
 package com.TruckApi.TruckApi.entities;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +39,9 @@ public @Data class TruckData {
 
 	@Enumerated(EnumType.STRING)
 	public TruckType truckType;
+	
+	@CreationTimestamp
+	public Timestamp timestamp;
 
 	public enum TruckType {
 		OPEN_HALF_BODY, OPEN_FULL_BODY, FLATBED, HALF_BODY_TRAILER, FULL_BODY_TRAILER, STANDARD_CONTAINER,
