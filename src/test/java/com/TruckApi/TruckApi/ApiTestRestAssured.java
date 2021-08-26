@@ -224,7 +224,7 @@ public class ApiTestRestAssured {
 	@Order(2)
 	public void addDataFailed_truckNoAlreadyExisted() throws Exception {
 
-		TruckRequest truckRequest = new TruckRequest("transporterId:0de885e0-5f43-4c68-8dde-b0f9ff81cb69",
+		TruckRequest truckRequest = new TruckRequest("transporterId:0de885e0-5f43-4c68-8dde-b0f9ff81cb67",
 				"AA 00 AA 1111", "alpha", 50, "driver:0de885e0-5f43-4c68-8dde-b25464747865", 20, null,
 				TruckData.TruckType.OPEN_HALF_BODY);
 
