@@ -26,7 +26,10 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file pom.xml -s $GITHUB_WORKSPACE/.mvn/wrapper/settings.xml
+      env:
+        git_username: ${{ github.actor }}
+        git_PAT: ${{ secrets.GITHUB_TOKEN }}
       
     - run: cd ~/actions-runner/deploy/truckApi/truckApi
     - run: sudo docker container stop truckContainer || true
