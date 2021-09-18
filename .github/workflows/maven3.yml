@@ -24,4 +24,7 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file pom.xml -s $GITHUB_WORKSPACE/.mvn/wrapper/settings.xml
+      env:
+        git_username: ${{ github.actor }}
+        git_PAT: ${{ secrets.GITHUB_TOKEN }}
