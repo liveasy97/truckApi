@@ -16,7 +16,8 @@ defaults:
 jobs:
   build:
 
-    runs-on: ['self-hosted', 'Linux', 'X64', 'dev' ]
+    runs-on: ['self-hosted', 'devDatabase' ]
+    
 
     steps:
     - uses: actions/checkout@v2
