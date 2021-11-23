@@ -16,7 +16,7 @@ defaults:
 jobs:
   build:
 
-    runs-on: ['self-hosted', 'devDatabase' ]
+    runs-on: ['self-hosted', 'truckDev' ]
     
 
     steps:
