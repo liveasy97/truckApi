@@ -65,6 +65,9 @@ public class TruckServiceImpl implements TruckService {
 		if (truckRequest.getImei() != null) {
 			truckData.setImei(truckRequest.getImei());
 		}
+		if (truckRequest.getDeviceId() != null) {
+			truckData.setDeviceId(truckRequest.getDeviceId());
+		}
 		if (truckRequest.getPassingWeight() != 0) {
 			truckData.setPassingWeight(truckRequest.getPassingWeight());
 		}
@@ -123,6 +126,7 @@ public class TruckServiceImpl implements TruckService {
 		truckCreateResponse.setTruckId(truckId_temp);
 		truckCreateResponse.setDriverId(truckData.getDriverId());
 		truckCreateResponse.setImei(truckData.getImei());
+		truckCreateResponse.setDeviceId(truckData.getDeviceId());
 		truckCreateResponse.setPassingWeight(truckData.getPassingWeight());
 		truckCreateResponse.setTruckApproved(false);
 		truckCreateResponse.setTruckLength(truckData.getTruckLength());
