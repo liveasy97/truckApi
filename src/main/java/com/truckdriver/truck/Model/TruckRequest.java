@@ -2,8 +2,6 @@ package com.truckdriver.truck.Model;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,7 @@ public class TruckRequest {
 	private String truckNo;
 
 	private String imei;
+	private String deviceId;
 	private long passingWeight;
 	private String driverId;
 	private Integer tyres;
