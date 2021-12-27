@@ -36,4 +36,4 @@ jobs:
     - run: sudo docker container rm truckContainer|| true
     - run: sudo docker image rm truck || true
     - run: sudo docker build -t truck .
-    - run: sudo docker run -p 9090:9090 --name truckContainer -d  truck | echo "success" 
+    - run: sudo docker run -p 9090:9090 --name truckContainer -d  truck | echo "success"
