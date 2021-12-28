@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.truckdriver.truck.Constants.TruckConstants;
-
 import com.truckdriver.truck.Exception.BusinessException;
 import com.truckdriver.truck.Exception.EntityNotFoundException;
 import com.truckdriver.truck.Model.TruckCreateResponse;
@@ -20,14 +19,12 @@ import com.truckdriver.truck.Model.TruckRequest;
 import com.truckdriver.truck.Model.TruckUpdateRequest;
 import com.truckdriver.truck.Model.TruckUpdateResponse;
 
-
 import lombok.extern.slf4j.Slf4j;
 import sharedDao.SecondTruckDao;
 import sharedDao.TruckDao;
 import sharedEntity.TruckData;
 import sharedEntity.TruckData.TruckType;
 import sharedEntity.TruckTransporterData;
-
 
 @Service
 @Slf4j
@@ -58,7 +55,7 @@ public class TruckServiceImpl implements TruckService {
 
 		String truckNoUpdated = generateTruckNumber(truckNo);
 
-		//		sending truckData to TruckData Table.
+		// sending truckData to TruckData Table.
 		TruckData truckData = new TruckData();
 
 		String truckId_temp = "truck:" + UUID.randomUUID().toString();
@@ -67,6 +64,9 @@ public class TruckServiceImpl implements TruckService {
 		truckData.setTruckNo(truckNoUpdated);
 		if (truckRequest.getImei() != null) {
 			truckData.setImei(truckRequest.getImei());
+		}
+		if (truckRequest.getDeviceId() != null) {
+			truckData.setDeviceId(truckRequest.getDeviceId());
 		}
 		if (truckRequest.getPassingWeight() != 0) {
 			truckData.setPassingWeight(truckRequest.getPassingWeight());
@@ -113,19 +113,20 @@ public class TruckServiceImpl implements TruckService {
 
 		truckDao.save(truckData);
 
-		//		sending truckData to truckId - TransporterId table.
+		// sending truckData to truckId - TransporterId table.
 		TruckTransporterData sData = new TruckTransporterData();
 		sData.setTransporterId(truckRequest.getTransporterId());
 		sData.setTruckId(truckId_temp);
 
 		sTruckDao.save(sData);
 		log.info("Truck Data is saved");
-		//		Sending success postResponse
+		// Sending success postResponse
 		truckCreateResponse.setStatus(truckConstants.ADD_SUCCESS);
 		truckCreateResponse.setTransporterId(truckData.getTransporterId());
 		truckCreateResponse.setTruckId(truckId_temp);
 		truckCreateResponse.setDriverId(truckData.getDriverId());
 		truckCreateResponse.setImei(truckData.getImei());
+		truckCreateResponse.setDeviceId(truckData.getDeviceId());
 		truckCreateResponse.setPassingWeight(truckData.getPassingWeight());
 		truckCreateResponse.setTruckApproved(false);
 		truckCreateResponse.setTruckLength(truckData.getTruckLength());
@@ -153,6 +154,9 @@ public class TruckServiceImpl implements TruckService {
 
 		if (truckUpdateRequest.getImei() != null) {
 			truckData.setImei(truckUpdateRequest.getImei());
+		}
+		if (truckUpdateRequest.getDeviceId() != null) {
+			truckData.setDeviceId(truckUpdateRequest.getDeviceId());
 		}
 
 		if (truckUpdateRequest.getPassingWeight() != 0) {
@@ -210,6 +214,7 @@ public class TruckServiceImpl implements TruckService {
 		response.setTruckId(id);
 		response.setDriverId(truckData.getDriverId());
 		response.setImei(truckData.getImei());
+		response.setDeviceId(truckData.getDeviceId());
 		response.setPassingWeight(truckData.getPassingWeight());
 		response.setTruckApproved(truckData.getTruckApproved());
 		response.setTruckLength(truckData.getTruckLength());
@@ -225,8 +230,8 @@ public class TruckServiceImpl implements TruckService {
 
 		TruckDeleteResponse truckDeleteResponse = new TruckDeleteResponse();
 
-		//		TruckData findTruckData = truckDao.findByTruckId(id);
-		//		TruckTransporterData findTruckTransporterData = sTruckDao.findByTruckId(id);
+		// TruckData findTruckData = truckDao.findByTruckId(id);
+		// TruckTransporterData findTruckTransporterData = sTruckDao.findByTruckId(id);
 
 		TruckData truckData = truckDao.findByTruckId(id);
 		TruckTransporterData findTruckTransporterData = sTruckDao.findByTruckId(id);
@@ -279,7 +284,7 @@ public class TruckServiceImpl implements TruckService {
 		if (pageNo == null)
 			pageNo = 0;
 
-		Pageable currentPage = PageRequest.of(pageNo, TruckConstants.pageSize,Sort.Direction.DESC,"timestamp");
+		Pageable currentPage = PageRequest.of(pageNo, TruckConstants.pageSize, Sort.Direction.DESC, "timestamp");
 
 		if (truckId != null) {
 			return truckDao.findByTruckId(truckId, currentPage);

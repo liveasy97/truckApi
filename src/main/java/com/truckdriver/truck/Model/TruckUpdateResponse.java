@@ -1,7 +1,5 @@
 package com.truckdriver.truck.Model;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,7 @@ public class TruckUpdateResponse {
 
 	private Boolean truckApproved;
 	private String imei;
+	private String deviceId;
 	private long passingWeight;
 	private String driverId;
 	private Integer tyres;
