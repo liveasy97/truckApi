@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 import sharedDao.SecondTruckDao;
 import sharedDao.TruckDao;
 import sharedEntity.TruckData;
-import sharedEntity.TruckData.TruckType;
 import sharedEntity.TruckTransporterData;
 
 @Service
@@ -81,19 +80,19 @@ public class TruckServiceImpl implements TruckService {
 		if (truckRequest.getTruckType() != null) {
 
 			if ("OPEN_HALF_BODY".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType(TruckType.OPEN_HALF_BODY);
+				truckData.setTruckType("OPEN_HALF_BODY");
 			else if ("OPEN_FULL_BODY".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType(TruckType.OPEN_FULL_BODY);
+				truckData.setTruckType("OPEN_FULL_BODY");
 			else if ("FLATBED".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType(TruckType.FLATBED);
+				truckData.setTruckType("FLATBED");
 			else if ("HALF_BODY_TRAILER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType(TruckType.HALF_BODY_TRAILER);
+				truckData.setTruckType("HALF_BODY_TRAILER");
 			else if ("FULL_BODY_TRAILER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType(TruckType.FULL_BODY_TRAILER);
+				truckData.setTruckType("FULL_BODY_TRAILER");
 			else if ("STANDARD_CONTAINER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType(TruckType.STANDARD_CONTAINER);
+				truckData.setTruckType("STANDARD_CONTAINER");
 			else if ("HIGH_CUBE_CONTAINER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType(TruckType.HIGH_CUBE_CONTAINER);
+				truckData.setTruckType("HIGH_CUBE_CONTAINER");
 			else {
 				log.error(truckConstants.INVALID_TRUCK_TYPE_ERROR);
 				throw new BusinessException(truckConstants.INVALID_TRUCK_TYPE_ERROR);
@@ -178,19 +177,19 @@ public class TruckServiceImpl implements TruckService {
 
 		if (truckUpdateRequest.getTruckType() != null) {
 			if ("OPEN_HALF_BODY".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType(TruckType.OPEN_HALF_BODY);
+				truckData.setTruckType("OPEN_HALF_BODY");
 			else if ("OPEN_FULL_BODY".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType(TruckType.OPEN_FULL_BODY);
+				truckData.setTruckType("OPEN_FULL_BODY");
 			else if ("FLATBED".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType(TruckType.FLATBED);
+				truckData.setTruckType("FLATBED");
 			else if ("HALF_BODY_TRAILER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType(TruckType.HALF_BODY_TRAILER);
+				truckData.setTruckType("HALF_BODY_TRAILER");
 			else if ("FULL_BODY_TRAILER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType(TruckType.FULL_BODY_TRAILER);
+				truckData.setTruckType("FULL_BODY_TRAILER");
 			else if ("STANDARD_CONTAINER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType(TruckType.STANDARD_CONTAINER);
+				truckData.setTruckType("STANDARD_CONTAINER");
 			else if ("HIGH_CUBE_CONTAINER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType(TruckType.HIGH_CUBE_CONTAINER);
+				truckData.setTruckType("HIGH_CUBE_CONTAINER");
 			else {
 				log.error(truckConstants.INVALID_TRUCK_TYPE_ERROR);
 				throw new BusinessException(truckConstants.INVALID_TRUCK_TYPE_ERROR);

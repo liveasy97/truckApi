@@ -3,7 +3,6 @@ package com.truckdriver.truck.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sharedEntity.TruckData.TruckType;
 
 @Data
 @AllArgsConstructor
@@ -19,5 +18,5 @@ public class TruckUpdateRequest {
 	private Integer tyres;
 	private Long truckLength;
 
-	private TruckType truckType;
+	private String truckType;
 }
