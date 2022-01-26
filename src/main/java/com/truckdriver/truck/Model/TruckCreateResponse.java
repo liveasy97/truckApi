@@ -3,6 +3,7 @@ package com.truckdriver.truck.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import sharedEntity.TruckData.RcStatus;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +26,6 @@ public class TruckCreateResponse {
 	private Long truckLength;
 
 	private String truckType;
+	private RcStatus rcStatus;
 
 }

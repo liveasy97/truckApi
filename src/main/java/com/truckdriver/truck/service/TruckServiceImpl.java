@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import sharedDao.SecondTruckDao;
 import sharedDao.TruckDao;
 import sharedEntity.TruckData;
+import sharedEntity.TruckData.RcStatus;
 import sharedEntity.TruckTransporterData;
 
 @Service
@@ -77,26 +78,24 @@ public class TruckServiceImpl implements TruckService {
 		if (truckRequest.getTruckLength() != null) {
 			truckData.setTruckLength(truckRequest.getTruckLength());
 		}
+		if (truckRequest.getRcStatus() != null) {
+			if ("pending".equals(String.valueOf(truckRequest.getRcStatus())))
+				truckData.setRcStatus(RcStatus.pending);
+			else if ("verified".equals(String.valueOf(truckRequest.getRcStatus())))
+				truckData.setRcStatus(RcStatus.verified);
+			else if ("rejected".equals(String.valueOf(truckRequest.getRcStatus())))
+				truckData.setRcStatus(RcStatus.rejected);
+			else {
+				log.error(truckConstants.INVALID_RC_STATUS_ERROR);
+				throw new BusinessException(truckConstants.INVALID_RC_STATUS_ERROR);
+			}
+		} else {
+			truckData.setRcStatus(RcStatus.notAdded);
+		}
+
 		if (truckRequest.getTruckType() != null) {
 
-			if ("OPEN_HALF_BODY".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType("OPEN_HALF_BODY");
-			else if ("OPEN_FULL_BODY".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType("OPEN_FULL_BODY");
-			else if ("FLATBED".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType("FLATBED");
-			else if ("HALF_BODY_TRAILER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType("HALF_BODY_TRAILER");
-			else if ("FULL_BODY_TRAILER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType("FULL_BODY_TRAILER");
-			else if ("STANDARD_CONTAINER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType("STANDARD_CONTAINER");
-			else if ("HIGH_CUBE_CONTAINER".equals(String.valueOf(truckRequest.getTruckType())))
-				truckData.setTruckType("HIGH_CUBE_CONTAINER");
-			else {
-				log.error(truckConstants.INVALID_TRUCK_TYPE_ERROR);
-				throw new BusinessException(truckConstants.INVALID_TRUCK_TYPE_ERROR);
-			}
+			truckData.setTruckType(truckRequest.getTruckType());
 		}
 
 		if (truckRequest.getTyres() != null) {
@@ -132,6 +131,7 @@ public class TruckServiceImpl implements TruckService {
 		truckCreateResponse.setTruckNo(truckData.getTruckNo());
 		truckCreateResponse.setTruckType(truckData.getTruckType());
 		truckCreateResponse.setTyres(truckData.getTyres());
+		truckCreateResponse.setRcStatus(truckData.getRcStatus());
 		log.info("Post Service Response returned");
 
 		return truckCreateResponse;
@@ -176,25 +176,24 @@ public class TruckServiceImpl implements TruckService {
 		}
 
 		if (truckUpdateRequest.getTruckType() != null) {
-			if ("OPEN_HALF_BODY".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType("OPEN_HALF_BODY");
-			else if ("OPEN_FULL_BODY".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType("OPEN_FULL_BODY");
-			else if ("FLATBED".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType("FLATBED");
-			else if ("HALF_BODY_TRAILER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType("HALF_BODY_TRAILER");
-			else if ("FULL_BODY_TRAILER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType("FULL_BODY_TRAILER");
-			else if ("STANDARD_CONTAINER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType("STANDARD_CONTAINER");
-			else if ("HIGH_CUBE_CONTAINER".equals(String.valueOf(truckUpdateRequest.getTruckType())))
-				truckData.setTruckType("HIGH_CUBE_CONTAINER");
-			else {
-				log.error(truckConstants.INVALID_TRUCK_TYPE_ERROR);
-				throw new BusinessException(truckConstants.INVALID_TRUCK_TYPE_ERROR);
-			}
+			truckData.setTruckType(truckUpdateRequest.getTruckType());
 		}
+
+		if (truckUpdateRequest.getRcStatus() != null) {
+			if ("pending".equals(String.valueOf(truckUpdateRequest.getRcStatus())))
+				truckData.setRcStatus(RcStatus.pending);
+			else if ("verified".equals(String.valueOf(truckUpdateRequest.getRcStatus())))
+				truckData.setRcStatus(RcStatus.verified);
+			else if ("rejected".equals(String.valueOf(truckUpdateRequest.getRcStatus())))
+				truckData.setRcStatus(RcStatus.rejected);
+			else {
+				log.error(truckConstants.INVALID_RC_STATUS_ERROR);
+				throw new BusinessException(truckConstants.INVALID_RC_STATUS_ERROR);
+			}
+		} else {
+			truckData.setRcStatus(RcStatus.notAdded);
+		}
+
 		if (truckUpdateRequest.getTyres() != null) {
 			if (truckUpdateRequest.getTyres() >= 4 && truckUpdateRequest.getTyres() <= 26
 					&& truckUpdateRequest.getTyres() % 2 == 0) {
@@ -220,6 +219,7 @@ public class TruckServiceImpl implements TruckService {
 		response.setTruckNo(truckData.getTruckNo());
 		response.setTruckType(truckData.getTruckType());
 		response.setTyres(truckData.getTyres());
+		response.setRcStatus(truckData.getRcStatus());
 		log.info("Put Service Response returned");
 		return response;
 	}

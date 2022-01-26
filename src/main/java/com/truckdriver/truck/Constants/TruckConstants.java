@@ -13,6 +13,7 @@ public class TruckConstants {
 	public static final String UPDATE_TRUCK_ID_ERROR = "Failed: Cannot update Truck Id";
 	public static final String INVALID_NUMBER_OF_TYRES_ERROR = "Failed: invalid number of tyres";
 	public static final String INVALID_TRUCK_TYPE_ERROR = "Failed: invalid tyres type";
+	public static final String INVALID_RC_STATUS_ERROR = "Failed: invalid rcStatus type";
 
 	// truck data
 	public static final String URI = "/truck";
