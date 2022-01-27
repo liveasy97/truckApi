@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sharedEntity.TruckData.TruckType;
+import sharedEntity.TruckData.RcStatus;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +24,7 @@ public class TruckRequest {
 	private Integer tyres;
 	private Long truckLength;
 
-	private TruckType truckType;
+	private String truckType;
+	public RcStatus rcStatus;
 
 }
