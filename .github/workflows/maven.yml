@@ -33,7 +33,9 @@ jobs:
       
     - run: cd ~/actions-runner/deploy/truckApi/truckApi
     - run: sudo docker container stop truckContainer || true
+    - run: sudo docker container stop truckPostgres || true
     - run: sudo docker container rm truckContainer|| true
     - run: sudo docker image rm truck || true
     - run: sudo docker build -t truck .
-    - run: sudo docker run -p 9090:9090 --name truckContainer -d  truck | echo "success"
+    - run:  sudo docker container start truckPostgres || sudo docker run --name truckPostgres -e POSTGRES_ROOT_PASSWORD=postgres -e POSTGRES_DATABASE=postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:alpine
+    - run: sudo docker run -p 9090:9090 --name truckContainer --link truckPostgres:postgres truck | echo "success"
